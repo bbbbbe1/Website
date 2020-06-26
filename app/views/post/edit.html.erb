@@ -1,0 +1,31 @@
+<h1>Edit Page</h1>
+<p>Edit the title and contents</p>
+<hr>
+<%= form_tag('/update', multipart: true) do %>
+    <input type="hidden" value="<%= @editPost.id %>" name="id">
+    <div class="form-group row">
+        <input type="text" class="form-control col-md-12" id="frmTitle" name="title" placeholder="Write the Title" value="<%= @editPost.title %>" />
+    </div>
+    <div class="form-group row">
+        <textarea class="form-control col-md-12" id="frmContent" name="content" placeholder="Write the Contents" rows="15"><%= @editPost.content %></textarea>
+    </div>
+
+    <div class="form-group row">
+        <input type="file" name="avatar" class="form-control">
+    </div>
+
+    <% if @editPost.avatar.exists? %>
+        <div class="row" style="margin: 30px;">
+            <img src="<%= @editPost.avatar.url %>" class="col-md-12 text-center">
+        </div>
+    <% end %>
+    
+    <div class="form-group row">
+        <div class="col-md-2">
+            <a href="/" class="btn btn-default">Go to List</a>
+        </div>
+        <div class="col-md-2 col-md-offset-8">
+            <input type="submit" value="Edit the post" id="frmSubmit" class="form-control btn btn-success">
+        </div>
+    </div>
+<% end %>
